@@ -1,3 +1,3 @@
 # SDLunchBox
-This repo contains code for predicting crowd at cafeteria.
+This repo contains code for predicting rush at cafeteria.
 Hello World
