@@ -4,6 +4,7 @@
  */  
 package com.snapdeal.lunchbox.mao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.snapdeal.lunchbox.mongo.entity.RushInfo;
@@ -18,5 +19,7 @@ public interface RushInfoMao {
     void saveRushInfo(RushInfo rushInfo);
 
     List<RushInfo> getRusInfoList();
+
+    RushInfo getCurrentUsers();
 
 }
