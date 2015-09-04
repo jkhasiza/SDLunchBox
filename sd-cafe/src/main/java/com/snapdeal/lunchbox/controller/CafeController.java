@@ -36,16 +36,22 @@ public class CafeController {
     
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String login(@RequestBody AccountBean accountBean) {
+    public ResponseBean<String> login(@RequestBody AccountBean accountBean) {
         try {
             cafeServiceInterface.login(accountBean);
-            return "SUCCESS";
+            return new ResponseBean<>("");
         } catch(Exception e) {
             LOGGER.error("Exception occurred while creating account", e);
-           return "FAILED";
+           return setError(e.getMessage());
         }
     }
     
+    private ResponseBean<String> setError(String error) {
+        ResponseBean<String> responseBean = new ResponseBean<String>();
+        responseBean.setStatusCode("ERROR");
+        responseBean.setMessage(error);
+        return responseBean;
+    }
     
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
