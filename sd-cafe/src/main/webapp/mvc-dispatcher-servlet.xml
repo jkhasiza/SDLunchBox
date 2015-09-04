@@ -7,10 +7,11 @@
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:repository="http://www.springframework.org/schema/data/repository"
 	xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:security="http://www.springframework.org/schema/security" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
 		http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -22,8 +23,6 @@
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd 
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-
-
 	<!-- <context:component-scan base-package="com.snapdeal.adplatform.cm" /> -->
 	<context:component-scan base-package="com.snapdeal">
 		<context:exclude-filter type="regex"
@@ -31,23 +30,30 @@
 		<context:exclude-filter type="regex"
 			expression="com\.snapdeal\.base\.startup\..*" />
 		<context:exclude-filter type="regex"
-			expression="com\.snapdeal\.base\.notification\..*Service.*" /> 
+			expression="com\.snapdeal\.base\.notification\..*Service.*" />
 
 	</context:component-scan>
 	<mvc:annotation-driven />
 	<tx:annotation-driven />
 	<task:annotation-driven />
 	<context:annotation-config />
-	<aop:aspectj-autoproxy/>
-	<context:property-placeholder
-		location="classpath:mysql.properties" />
+	<aop:aspectj-autoproxy />
 
-	<bean id="passwordEncoder"
-		class="org.springframework.security.crypto.password.StandardPasswordEncoder">
-		<constructor-arg value="${saltcode}" />
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
+
+	<mongo:mongo replica-set="#{systemProperties['mongoCafe.replicaset']}"
+		id="mongoCafe">
+		<mongo:options auto-connect-retry="true"
+			connections-per-host="40" slave-ok="true" />
+	</mongo:mongo>
+
+	<mongo:db-factory dbname="sdCafedb" mongo-ref="mongoCafe"
+		id="mongoDbFactoryApi" />
+
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactoryApi" />
 	</bean>
-	
-	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -59,54 +65,6 @@
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="validationMessageSource" ref="messageSource" />
-	</bean>
-	<bean class="com.snapdeal.base.startup.config.AppEnvironmentContext"
-		id="appEnvironmentContext">
-		<constructor-arg value="SNAPAD-ADMIN" />
-	</bean>
-
-	<bean id="httpclientProperties" class="com.snapdeal.base.utils.HttpClientPropertiesUtil">
-		<property name="location" value="/soa-config/httpclient.properties" />
-	</bean>
-
-
-	<bean class="org.springframework.validation.DefaultMessageCodesResolver"
-		p:prefix="validation." />
-
-	<jpa:repositories base-package="com.snapdeal.adplatform.cm.core.repositories"
-		factory-class="com.snapdeal.adplatform.cm.core.repository.factory.CustomRepositoryFactoryBean" />
-
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
-		<!-- spring based scanning for entity classes -->
-		<property name="packagesToScan" value="com.snapdeal.adplatform.cm.core.entity" />
-		<property name="jpaProperties">
-			<props>
-				<prop key="hibernate.format_sql">false</prop>
-			</props>
-		</property>
-	</bean>
-
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClass" value="${mysql.db.driver}" />
-		<property name="jdbcUrl" value="${mysql.db.url}" />
-		<property name="user" value="${mysql.db.user}" />
-		<property name="password" value="${mysql.db.pass}" />
-		<property name="maxPoolSize" value="${jdbc.maxpoolsize}" />
-		<property name="minPoolSize" value="${jdbc.minpoolsize}" />
-	</bean>
-
-	<bean id="jpaVendorAdapter"
-		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-		<property name="showSql" value="false" />
-		<property name="generateDdl" value="false" />
-		<property name="database" value="MYSQL" />
 	</bean>
 
 </beans>
