@@ -16,7 +16,7 @@
           <input type="password" id="inputPassword" name="password" placeholder="Your Password" class="form-control input-lg" ng-model="patient.password" required/>
           <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help-block">Password can't be empty</p>
         </div>
-        <a href="" class="pull-right m-t-xs">
+        <a ui-sref="dashboard"class="pull-right m-t-xs">
           <small>SKIP</small>
         </a>
         <button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary btn-block">Sign in</button>

@@ -53,5 +53,6 @@
 /home/akshay/projects/snapdeal-wth/SDLunchBox/sd-cafe/mobile/SDcafe/platforms/android/assets/www/dist/fonts/opensans/opensans-webfont.woff \
 /home/akshay/projects/snapdeal-wth/SDLunchBox/sd-cafe/mobile/SDcafe/platforms/android/assets/www/dist/fonts/opensans/opensans-light-webfont.woff \
 /home/akshay/projects/snapdeal-wth/SDLunchBox/sd-cafe/mobile/SDcafe/platforms/android/assets/www/dist/js/app.min.js \
+/home/akshay/projects/snapdeal-wth/SDLunchBox/sd-cafe/mobile/SDcafe/platforms/android/assets/www/dist/js/app.min.js.orig \
 /home/akshay/projects/snapdeal-wth/SDLunchBox/sd-cafe/mobile/SDcafe/platforms/android/assets/www/dist/css/app.min.css \
 /home/akshay/projects/snapdeal-wth/SDLunchBox/sd-cafe/mobile/SDcafe/platforms/android/ant-build/AndroidManifest.xml \

@@ -1,4 +1,4 @@
-angular.module( 'login', [ 'ngJustGage' ] ).config( [ '$stateProvider', '$urlRouterProvider', '$locationProvider',
+angular.module( 'login', [  ] ).config( [ '$stateProvider', '$urlRouterProvider', '$locationProvider',
   function( $stateProvider, $urlRouterProvider, $locationProvider ) {
     $locationProvider.hashPrefix( '!' );
     $stateProvider.state( 'login', {
