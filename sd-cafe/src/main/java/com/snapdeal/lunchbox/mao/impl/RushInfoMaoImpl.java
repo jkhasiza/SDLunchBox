@@ -29,7 +29,7 @@ public class RushInfoMaoImpl implements RushInfoMao {
     @Autowired
     private MongoOperations        mongoOperations;
     
-    public static final long       DELTATIME = 3 * 3600 * 1000;
+    public static final long       DELTA_TIME = 3 * 3600 * 1000;
 
     @Override
     public void saveRushInfo(RushInfo rushInfo) {
@@ -40,7 +40,7 @@ public class RushInfoMaoImpl implements RushInfoMao {
     @Override
     public List<RushInfo> getRusInfoList() {
         Date endTime = new Date();
-        Date startTime = new Date(endTime.getTime() - DELTATIME);
+        Date startTime = new Date(endTime.getTime() - DELTA_TIME);
         Query query = new Query();
         Criteria criteria = Criteria.where("date").gte(startTime).lt(endTime);
         query.addCriteria(criteria);

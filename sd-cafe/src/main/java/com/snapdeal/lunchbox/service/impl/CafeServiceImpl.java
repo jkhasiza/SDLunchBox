@@ -11,7 +11,9 @@ import com.snapdeal.lunchbox.bean.AccountBean;
 import com.snapdeal.lunchbox.bean.CafeMeterBean;
 import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
 import com.snapdeal.lunchbox.mao.AccountMao;
+import com.snapdeal.lunchbox.mao.RushInfoMao;
 import com.snapdeal.lunchbox.mongo.entity.Account;
+import com.snapdeal.lunchbox.mongo.entity.RushInfo;
 import com.snapdeal.lunchbox.service.CafeServiceInterface;
 
 /**
@@ -23,6 +25,8 @@ import com.snapdeal.lunchbox.service.CafeServiceInterface;
 public class CafeServiceImpl implements CafeServiceInterface {
 
     @Autowired private AccountMao accountMao;
+    @Autowired private RushInfoMao rusInfoMao;
+    
     
     @Override
     public String findAdById() {
@@ -39,7 +43,11 @@ public class CafeServiceImpl implements CafeServiceInterface {
 
     @Override
     public CafeMeterBean getCafeStatus() {
-        // TODO Auto-generated method stub
+        RushInfo rushInfo = rusInfoMao.getCurrentUsers();
+        if(null != rushInfo){
+            CafeMeterBean cafeMeterBean=  new CafeMeterBean(rushInfo);
+            return cafeMeterBean;
+        }
         return null;
     }
 

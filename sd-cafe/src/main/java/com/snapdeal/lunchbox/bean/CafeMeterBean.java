@@ -6,6 +6,8 @@ package com.snapdeal.lunchbox.bean;
 
 import java.io.Serializable;
 
+import com.snapdeal.lunchbox.mongo.entity.RushInfo;
+
 /**
  *  
  *  @version     1.0, 04-Sep-2015
@@ -17,6 +19,10 @@ public class CafeMeterBean implements Serializable {
     private int numberOfUser;
     private int availableSeats;
    
+    public CafeMeterBean(RushInfo rushInfo) {
+        this.numberOfUser = rushInfo.getUsers();
+        this.availableSeats = 450;
+    }
     public int getNumberOfUser() {
         return numberOfUser;
     }
