@@ -4,15 +4,20 @@
  */
 package com.snapdeal.lunchbox.mongo.entity;
 
+import java.io.Serializable;
+
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @version 1.0, Sep 4, 2015
  * @author jitesh
  */
-@Document
-public class Account {
+@Document(collection = "account")
+public class Account implements Serializable{
 
+    private static final long serialVersionUID = 6139087336832557014L;
+    @Id
     private Long   id;
     private String mobileNumber;
     private Long   groupId;

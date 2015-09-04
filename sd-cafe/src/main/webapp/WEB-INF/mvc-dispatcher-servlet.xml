@@ -36,11 +36,12 @@
 		<property name="basename" value="classpath:errorMessage_en_US" />
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
-
+	<!-- <bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="validationMessageSource" ref="messageSource" />
-	</bean>
+	</bean> -->
 
 </beans>
