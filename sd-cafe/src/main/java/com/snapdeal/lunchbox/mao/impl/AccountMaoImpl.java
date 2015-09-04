@@ -31,12 +31,12 @@ public class AccountMaoImpl implements AccountMao {
 
     @Override
     public Account saveAccount(Account account) {
-        Long id= getId();
-       account.setId(id);
-       mongoOperations.save(account);
-       Criteria criteria = Criteria.where("id").is(id);
-       Account dbaccount = mongoOperations.findOne(new Query(criteria), Account.class);
-       return dbaccount;
+        Long id = getId();
+        account.setId(id);
+        mongoOperations.save(account);
+        Criteria criteria = Criteria.where("id").is(id);
+        Account dbaccount = mongoOperations.findOne(new Query(criteria), Account.class);
+        return dbaccount;
     }
 
     @Override
@@ -56,9 +56,9 @@ public class AccountMaoImpl implements AccountMao {
         Account account = mongoOperations.findAndModify(query, update, Account.class);
         return account;
     }
-    
+
     @Override
-    public Account updateAccountDeviceId(Long id , String deviceId) {
+    public Account updateAccountDeviceId(Long id, String deviceId) {
         Query query = new Query();
         Criteria criteria = Criteria.where("id").is(id);
         query.addCriteria(criteria);

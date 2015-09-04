@@ -11,17 +11,16 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * @version 1.0, 04-Sep-2015
- * @author himani
+ * @version 1.0, Sep 4, 2015
+ * @author jitesh
  */
-@Document(collection = "rushInfo")
-public class RushInfo implements Serializable {
+@Document
+public class RushPrediction implements Serializable {
 
-    private static final long serialVersionUID = 2263459833768404518L;
-
+    private static final long serialVersionUID = 1L;
     @Id
     private Long              id;
-    private int               users;
+    private int               userCount;
     private Date              date;
 
     public Long getId() {
@@ -32,12 +31,12 @@ public class RushInfo implements Serializable {
         this.id = id;
     }
 
-    public int getUsers() {
-        return users;
+    public int getUserCount() {
+        return userCount;
     }
 
-    public void setUsers(int users) {
-        this.users = users;
+    public void setUserCount(int userCount) {
+        this.userCount = userCount;
     }
 
     public Date getDate() {

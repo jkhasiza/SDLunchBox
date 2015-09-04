@@ -4,6 +4,9 @@
  */
 package com.snapdeal.lunchbox.service;
 
+import java.util.Date;
+import java.util.List;
+
 import com.snapdeal.lunchbox.bean.AccountBean;
 import com.snapdeal.lunchbox.bean.CafeMeterBean;
 import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
@@ -14,11 +17,17 @@ import com.snapdeal.lunchbox.mongo.entity.Account;
  * @author mukund
  */
 public interface CafeServiceInterface {
-    public String findAdById();
     public Account login(AccountBean account);
+
     public CafeMeterBean getCafeStatus();
+
     public UserGroupRequestBean getGroupInfo(String phoneNumber);
+
     public UserGroupRequestBean getPendingUsers(String phoneNumber);
+
     public Account createGroup(UserGroupRequestBean userGroupRequestBean);
+
     public Account updateGroup(UserGroupRequestBean userGroupRequestBean);
+
+    void updateUserArrivalInfo(List<String> mobileNumbers, Date date);
 }
