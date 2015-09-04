@@ -34,24 +34,18 @@ public class CafeController {
     @Autowired
     private CafeServiceInterface cafeServiceInterface;
     
-    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public ResponseBean<?> login(@RequestBody AccountBean accountBean) {
+    public String login(@RequestBody AccountBean accountBean) {
         try {
             cafeServiceInterface.login(accountBean);
-            return new ResponseBean<>();
+            return "SUCCESS";
         } catch(Exception e) {
             LOGGER.error("Exception occurred while creating account", e);
-           return null;
+           return "FAILED";
         }
     }
     
-    private ResponseBean<String> setErrorMessage(String error) {
-        ResponseBean<String> responseBean = new ResponseBean<>();
-        responseBean.setMessage(error);
-        responseBean.setStatusCode("500");
-        return responseBean;
-    }
     
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody

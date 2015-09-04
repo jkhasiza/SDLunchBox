@@ -4,12 +4,19 @@
  */  
 package com.snapdeal.lunchbox.bean;
 
+import java.io.Serializable;
+
 /**
  *  
  *  @version     1.0, 04-Sep-2015
  *  @author mukund
  */
-public class AccountBean {
+public class AccountBean implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    
     private String            mobileNumber;
     private String            deviceId;
     
