@@ -63,7 +63,7 @@ public class CrawlerService {
                     updatePrediction(lastAccessedTime, noOfUsers);
                     RushInfo rushInfo = new RushInfo();
                     rushInfo.setDate(lastAccessedTime);
-                    rushInfo.setUsers(noOfUsers);
+                    rushInfo.setUsers(noOfUsers * 10 / 7);
                     rushMaoInfo.saveRushInfo(rushInfo);
                     System.out.println(noOfUsers + lastAccessedTime.toString());
                 } catch (ParseException e) {
@@ -78,11 +78,11 @@ public class CrawlerService {
         RushInfo rush = rushMaoInfo.getCurrentUsers();
         int deltaUsers = rush.getUsers() - noOfUsers;
         if (deltaUsers > 0) {
-            updatePrecdiction(deltaUsers);
+            updatePrecdiction(rush.getUsers(), deltaUsers);
         }
     }
 
-    private void updatePrecdiction(int deltaUsers) {
+    private void updatePrecdiction(int currentUsers, int deltaUsers) {
         Map<String, RushPrediction> predictionMap = rushMaoInfo.getRushPredictionList();
         Date currTime = new Date();
         String currTimeString = null;
@@ -95,7 +95,7 @@ public class CrawlerService {
                     prediction = new RushPrediction();
                     try {
                         prediction.setDate(dt.parse(currTimeString));
-                        prediction.setUserCount(0);
+                        prediction.setUserCount(currentUsers);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

@@ -40,11 +40,12 @@ public class CafeController {
     @Autowired
     private CafeServiceInterface cafeServiceInterface;
 
-    @RequestMapping(value = "login",method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "login", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public ResponseBean<?> login(HttpServletResponse response, HttpServletRequest request, @RequestParam("mobileNumber") String mobileNumber,@RequestParam(value ="deviceId",required = false) String deviceId) {
+    public ResponseBean<?> login(HttpServletResponse response, HttpServletRequest request, @RequestParam("mobileNumber") String mobileNumber,
+            @RequestParam(value = "deviceId", required = false) String deviceId) {
         try {
-            cafeServiceInterface.login(mobileNumber,deviceId);
+            cafeServiceInterface.login(mobileNumber, deviceId);
             return new ResponseBean<>("0", "OK");
         } catch (Exception e) {
             LOGGER.error("Exception occurred while creating account", e);
@@ -63,6 +64,7 @@ public class CafeController {
             return new ResponseBean<>("500", "Oops! Something bad is happened");
         }
     }
+
     @RequestMapping(method = RequestMethod.GET, produces = "application/json", value = "/verifyOtp")
     @ResponseBody
     public ResponseBean<?> verifyOtp(@RequestParam("mobileNumber") String mobileNumber, @RequestParam(value = "deviceId", required = false) String deviceId,
@@ -72,7 +74,7 @@ public class CafeController {
             accountBean.setDeviceId(deviceId);
             accountBean.setMobileNumber(mobileNumber);
             accountBean.setOtp(otp);
-            
+
             Account account = cafeServiceInterface.verifyOtp(accountBean);
             return new ResponseBean<Account>(account);
         } catch (Exception e) {
@@ -93,6 +95,28 @@ public class CafeController {
         }
     }
 
+    @RequestMapping(value = "/rushInfo", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public ResponseBean<?> getRushInfo() {
+        try {
+            return new ResponseBean<>(cafeServiceInterface.getRushInfo());
+        } catch (Exception e) {
+            LOGGER.error("Exception occurred while getting group ", e);
+            return new ResponseBean<>("500", "Oops! Something bad is happened");
+        }
+    }
+
+    @RequestMapping(value = "/rushPrediction", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public ResponseBean<?> getRushPrediction() {
+        try {
+            return new ResponseBean<>(cafeServiceInterface.getRushPrediction());
+        } catch (Exception e) {
+            LOGGER.error("Exception occurred while getting group ", e);
+            return new ResponseBean<>("500", "Oops! Something bad is happened");
+        }
+    }
+
     @RequestMapping(value = "/group", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public ResponseBean<UserGroupRequestBean> getGroupInfo(@RequestParam("phoneNumber") String phoneNumber) {
@@ -104,14 +128,13 @@ public class CafeController {
         }
     }
 
-
     @RequestMapping(value = "/createGroup", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public ResponseBean<String> createGroup(@RequestParam(value = "userId") String userId, @RequestParam(value = "groupName") String groupName,
             @RequestParam("phoneNumbers") List<String> phoneNumbers) {
         try {
             UserGroupRequestBean userGroupRequestBean = convertor(userId, groupName, phoneNumbers);
-            
+
             cafeServiceInterface.createGroup(userGroupRequestBean);
             return new ResponseBean<>("");
         } catch (Exception e) {
@@ -122,13 +145,13 @@ public class CafeController {
 
     private UserGroupRequestBean convertor(String userId, String groupName, List<String> phoneNumbers) {
         UserGroupRequestBean userGroupRequestBean = new UserGroupRequestBean();
-        
+
         userGroupRequestBean.setUserId(userId);
         BuddyGroup buddyGroup = new BuddyGroup();
         buddyGroup.setName(groupName);
-        if(phoneNumbers != null && phoneNumbers.size() > 0) {
+        if (phoneNumbers != null && phoneNumbers.size() > 0) {
             Set<Buddy> buddies = new HashSet<Buddy>();
-            for(String phoneNumber : phoneNumbers) {
+            for (String phoneNumber : phoneNumbers) {
                 Buddy buddy = new Buddy();
                 buddy.setPhone(phoneNumber);
                 buddy.setName(phoneNumber);
@@ -139,7 +162,7 @@ public class CafeController {
         userGroupRequestBean.setBuddyGroup(buddyGroup);
         return userGroupRequestBean;
     }
-    
+
     @RequestMapping(value = "/updateGroup", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public ResponseBean<String> updateGroup(@RequestParam(value = "userId") String userId, @RequestParam(value = "groupName") String groupName,

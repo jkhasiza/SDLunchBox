@@ -26,6 +26,7 @@ import com.snapdeal.lunchbox.mongo.entity.Account;
 import com.snapdeal.lunchbox.mongo.entity.Buddy;
 import com.snapdeal.lunchbox.mongo.entity.BuddyGroup;
 import com.snapdeal.lunchbox.mongo.entity.RushInfo;
+import com.snapdeal.lunchbox.mongo.entity.RushPrediction;
 import com.snapdeal.lunchbox.mongo.entity.UserArrivalInfo;
 import com.snapdeal.lunchbox.mongo.entity.UserOtp;
 import com.snapdeal.lunchbox.service.CafeServiceInterface;
@@ -49,6 +50,8 @@ public class CafeServiceImpl implements CafeServiceInterface {
     private UserArrivalMao          userArrivalMao;
     @Autowired
     private RushPredictionMao       rushPredictionMao;
+    @Autowired
+    private RushInfoMao             rushInfoMao;
 
     @Autowired
     private TwillioServiceInterface twillioServiceInterface;
@@ -61,8 +64,8 @@ public class CafeServiceImpl implements CafeServiceInterface {
         return account;
     }
 
-    public void login(String mobileNo,String deviceId) {
-        String message = "Your otp for SdCafe app is $otp";
+    public void login(String mobileNo, String deviceId) {
+        String message = "Your lunch problems are over. OTP for SDCafe is $otp";
         String otp = twillioServiceInterface.messageTest(mobileNo, message);
         if (!StringUtils.isEmpty(otp)) {
             UserOtp dbuserOtp = userOtpMao.getOTP(mobileNo);
@@ -71,7 +74,7 @@ public class CafeServiceImpl implements CafeServiceInterface {
                 userOtp.setOtp(otp);
                 userOtp.setMobileNumber(mobileNo);
                 userOtpMao.saveUserOtp(userOtp);
-            }else{
+            } else {
                 userOtpMao.updateUserOtp(dbuserOtp.getId(), otp);
             }
         }
@@ -173,5 +176,15 @@ public class CafeServiceImpl implements CafeServiceInterface {
                 rushPredictionMao.updateWithIncrement(date, 1);
             }
         }
+    }
+
+    @Override
+    public List<RushInfo> getRushInfo() {
+        return rushInfoMao.getRushInfoList();
+    }
+
+    @Override
+    public List<RushPrediction> getRushPrediction() {
+        return rushPredictionMao.getRushPredictionList();
     }
 }
