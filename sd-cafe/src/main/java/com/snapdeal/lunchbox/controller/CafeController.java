@@ -136,6 +136,7 @@ public class CafeController {
             }
             buddyGroup.setBuddies(buddies);
         }
+        userGroupRequestBean.setBuddyGroup(buddyGroup);
         return userGroupRequestBean;
     }
     
