@@ -6,7 +6,7 @@ angular.module( 'home', [] ).config( function( $stateProvider, $urlRouterProvide
     templateUrl: 'home/home.tpl',
     controller: 'HomeCtrl'
   } );
-} ).controller( 'HomeCtrl', [ '$scope', 'localStorageService', 'Constants', '$state',
+} ).controller( 'HomeCtrl', [ '$scope', 'localStorageService', 'PatientVerificationService', 'Constants', '$state',
 '$rootScope',
 function($scope, localStorageService, PatientVerificationService, Constants, $state,
   $rootScope ) {
