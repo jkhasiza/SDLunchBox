@@ -5,7 +5,8 @@
 package com.snapdeal.lunchbox.bean;
 
 import java.io.Serializable;
-import java.util.List;
+
+import com.snapdeal.lunchbox.mongo.entity.BuddyGroup;
 
 /**
  *  
@@ -16,19 +17,19 @@ public class UserGroupRequestBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String userId;
-    private List<String>      users;
-    
+    private BuddyGroup      buddyGroup;
+   
     public String getUserId() {
         return userId;
     }
     public void setUserId(String userId) {
         this.userId = userId;
     }
-    public List<String> getUsers() {
-        return users;
+    public BuddyGroup getBuddyGroup() {
+        return buddyGroup;
     }
-    public void setUsers(List<String> users) {
-        this.users = users;
+    public void setBuddyGroup(BuddyGroup buddyGroup) {
+        this.buddyGroup = buddyGroup;
     }
-    
+   
 }

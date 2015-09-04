@@ -22,7 +22,7 @@ public class Account implements Serializable {
     private Long              id;
     @Indexed(unique = true)
     private String            mobileNumber;
-    private Long              groupId;
+    private BuddyGroup        buddyGroup;
     private String            deviceId;
 
     public Long getId() {
@@ -49,11 +49,11 @@ public class Account implements Serializable {
         this.deviceId = deviceId;
     }
 
-    public Long getGroupId() {
-        return groupId;
+    public BuddyGroup getBuddyGroup() {
+        return buddyGroup;
     }
 
-    public void setGroupId(Long groupId) {
-        this.groupId = groupId;
+    public void setBuddyGroup(BuddyGroup buddyGroup) {
+        this.buddyGroup = buddyGroup;
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.snapdeal.lunchbox.mao.AccountMao;
 import com.snapdeal.lunchbox.mongo.entity.Account;
+import com.snapdeal.lunchbox.mongo.entity.BuddyGroup;
 
 /**
  * @version 1.0, 04-Sep-2015
@@ -82,5 +83,14 @@ public class AccountMaoImpl implements AccountMao {
         return idCounter.incrementAndGet();
     }
 
-    
+    @Override
+    public Account createAccountGroup(String mobileNo, BuddyGroup buddyGroup) {
+        Query query = new Query();
+        Criteria criteria = Criteria.where("mobileNumber").is(mobileNo);
+        query.addCriteria(criteria);
+        Update update = new Update();
+        update.set("buddyGroup", buddyGroup);
+        Account account = mongoOperations.findAndModify(query, update, Account.class);
+        return account;
+    }
 }
