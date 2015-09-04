@@ -7,6 +7,7 @@ package com.snapdeal.lunchbox.mongo.entity;
 import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -14,14 +15,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author jitesh
  */
 @Document(collection = "account")
-public class Account implements Serializable{
+public class Account implements Serializable {
 
     private static final long serialVersionUID = 6139087336832557014L;
     @Id
-    private Long   id;
-    private String mobileNumber;
-    private Long   groupId;
-    private String deviceId;
+    private Long              id;
+    @Indexed(unique = true)
+    private String            mobileNumber;
+    private Long              groupId;
+    private String            deviceId;
 
     public Long getId() {
         return id;

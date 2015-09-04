@@ -15,6 +15,11 @@ import com.snapdeal.lunchbox.mongo.entity.Account;
  */
 public interface AccountMao {
 
-    void saveAccount();
+
+    Account getAccountByPhoneNo(String mobileNo);
+
+    void saveAccount(Account account);
+
+    Account updateAccountGroup(Long groupId, String mobileNo);
 
 }
