@@ -1,0 +1,145 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.snapdeal.lunchbox</groupId>
+	<artifactId>sd-cafe</artifactId>
+	<packaging>war</packaging>
+	<version>1.0</version>
+	<name>sd-cafe Backend</name>
+	<properties>
+		<spring.version>4.1.5.RELEASE</spring.version>
+	</properties>
+	<dependencies>
+
+		<!-- Spring 3 dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>javax.persistence</artifactId>
+			<version>2.1.0</version>
+		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>1.7.2.RELEASE</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency> -->
+	</dependencies>
+
+	<build>
+		<finalName>ROOT</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources/conf</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-resources</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>src/main/resources/conf</directory>
+							<targetPath>WEB-INF/classes</targetPath>
+							<filtering>true</filtering>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<property file="${user.dir}/user.properties" />
+								<echo message="+---------------------------------------------------+" />
+								<echo message="    deleteing war from tomcat server" />
+								<echo message="+---------------------------------------------------+" />
+								<delete includeEmptyDirs="true" failonerror="false">
+									<fileset dir="${cafe.webapp.home}" />
+								</delete>
+								<echo message="+---------------------------------------------------+" />
+								<echo message="    copying war to tomcat server" />
+								<echo message="+---------------------------------------------------+" />
+								<copy file="${project.build.directory}/ROOT.war" todir="${cafe.webapp.home}" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>gitserver.snapdeal.com</id>
+			<name>gitserver.snapdeal.com-snapshots</name>
+			<url>http://server.development.com:8080/libs-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>gitserver.snapdeal.com</id>
+			<name>gitserver.snapdeal.com-snapshots</name>
+			<url>http://server.development.com:8080/libs-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>gitserver.snapdeal.com</id>
+			<name>gitserver.snapdeal.com-releases</name>
+			<url>http://server.development.com:8080/libs-release-local</url>
+		</repository>
+		<repository>
+			<id>gitserver.snapdeal.snapshot.com</id>
+			<name>gitserver.snapdeal.com-snapshots</name>
+			<url>http://server.development.com:8080/libs-snapshot-local</url>
+		</repository>
+	</repositories>
+</project>
+
