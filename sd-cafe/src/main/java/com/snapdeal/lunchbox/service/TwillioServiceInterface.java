@@ -4,10 +4,10 @@
  */
 package com.snapdeal.lunchbox.service;
 
-/**
- * @version 1.0, 04-Sep-2015
- * @author mukund
- */
+import com.twilio.sdk.TwilioRestException;
+
+
 public interface TwillioServiceInterface {
-    public String findAdById();
+   
+    public String messageTest(String To,String Text)throws TwilioRestException;
 }
