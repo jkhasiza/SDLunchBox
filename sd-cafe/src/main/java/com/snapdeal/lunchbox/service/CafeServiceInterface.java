@@ -4,10 +4,18 @@
  */
 package com.snapdeal.lunchbox.service;
 
+import com.snapdeal.lunchbox.bean.CafeMeterBean;
+import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
+
 /**
  * @version 1.0, 04-Sep-2015
  * @author mukund
  */
 public interface CafeServiceInterface {
     public String findAdById();
+    public String login(String phoneNumber);
+    public CafeMeterBean getCafeStatus();
+    public UserGroupRequestBean getGroupInfo(String phoneNumber);
+    public UserGroupRequestBean getPendingUsers(String phoneNumber);
+    public void createGroup(UserGroupRequestBean userGroupRequestBean);
 }
