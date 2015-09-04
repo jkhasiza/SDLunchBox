@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.snapdeal.lunchbox.service.TwillioServiceInterface;
+import com.snapdeal.lunchbox.utils.CafeUtils;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.SmsFactory;
@@ -25,20 +26,26 @@ public class TwillioServiceImpl implements TwillioServiceInterface {
     public static final String ACCOUNT_SID = "ACb3e06a447ecfe4eb48af9109d0163f56";
     public static final String AUTH_TOKEN  = "c92b139a79758a470934baaf8ca9a741";
 
-    public String messageTest(String To, String Text) throws TwilioRestException {
+    public String messageTest(String To, String text) {
         // Send an SMS (Requires version 3.4+)
-        String toMobile = "+91";
-        System.out.println("send message to " + To + Text);
+        String otp = CafeUtils.generateOTP();
+       try{
+         text = text.replace("$otp", otp);
+        String toMobile = "";
+        System.out.println("send message to " + To + text);
         if (!StringUtils.isEmpty(To)) {
-           toMobile = toMobile+To.substring(To.length() - 9, To.length() - 1);
+           toMobile = "+"+"91"+To;
         }
         final SmsFactory messageFactory = mainAccount.getSmsFactory();
         final List<NameValuePair> messageParams = new ArrayList<NameValuePair>();
         messageParams.add(new BasicNameValuePair("To", toMobile)); // Replace with a17637036155 valid phone number
-        messageParams.add(new BasicNameValuePair("From", "+")); // Replace with a valid phone number in your account
-        messageParams.add(new BasicNameValuePair("Body", Text));
+        messageParams.add(new BasicNameValuePair("From", "+17637036155")); // Replace with a valid phone number in your account
+        messageParams.add(new BasicNameValuePair("Body", text));
         messageFactory.create(messageParams);
-        return null;
+       }catch(TwilioRestException e){
+           return null;
+       }
+        return otp;
     }
 
     // Create a rest client

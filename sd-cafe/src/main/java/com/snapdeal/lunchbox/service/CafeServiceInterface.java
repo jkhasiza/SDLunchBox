@@ -17,7 +17,8 @@ import com.snapdeal.lunchbox.mongo.entity.Account;
  * @author mukund
  */
 public interface CafeServiceInterface {
-    public Account login(AccountBean account);
+
+    public void login(AccountBean account);
 
     public CafeMeterBean getCafeStatus();
 
@@ -25,9 +26,13 @@ public interface CafeServiceInterface {
 
     public UserGroupRequestBean getPendingUsers(String phoneNumber);
 
+    public Account updateGroup(UserGroupRequestBean userGroupRequestBean);
+
     public Account createGroup(UserGroupRequestBean userGroupRequestBean);
 
-    public Account updateGroup(UserGroupRequestBean userGroupRequestBean);
+    public Account getUser(String mobileNumber);
+
+    Account verifyOtp(AccountBean account);
 
     void updateUserArrivalInfo(List<String> mobileNumbers, Date date);
 }

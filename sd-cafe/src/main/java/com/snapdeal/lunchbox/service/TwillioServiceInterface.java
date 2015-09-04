@@ -9,5 +9,5 @@ import com.twilio.sdk.TwilioRestException;
 
 public interface TwillioServiceInterface {
    
-    public String messageTest(String To,String Text)throws TwilioRestException;
+    public String messageTest(String To,String Text);
 }
