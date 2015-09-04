@@ -19,6 +19,7 @@ import com.snapdeal.lunchbox.bean.AccountBean;
 import com.snapdeal.lunchbox.bean.CafeMeterBean;
 import com.snapdeal.lunchbox.bean.ResponseBean;
 import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
+import com.snapdeal.lunchbox.mongo.entity.Account;
 import com.snapdeal.lunchbox.service.CafeServiceInterface;
 
 /**
@@ -36,13 +37,13 @@ public class CafeController {
     
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public ResponseBean<String> login(@RequestBody AccountBean accountBean) {
+    public ResponseBean<?> login(@RequestBody AccountBean accountBean) {
         try {
-            cafeServiceInterface.login(accountBean);
-            return new ResponseBean<>("");
+            Account account = cafeServiceInterface.login(accountBean);
+            return new ResponseBean<Account>(account);
         } catch(Exception e) {
             LOGGER.error("Exception occurred while creating account", e);
-           return setError(e.getMessage());
+           return new ResponseBean<>("500","Oops! Something bad is happened");
         }
     }
     
