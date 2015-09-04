@@ -11,6 +11,7 @@ import com.snapdeal.lunchbox.bean.AccountBean;
 import com.snapdeal.lunchbox.bean.CafeMeterBean;
 import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
 import com.snapdeal.lunchbox.mongo.entity.Account;
+import com.snapdeal.lunchbox.mongo.entity.BuyFoodInfo;
 
 /**
  * @version 1.0, 04-Sep-2015
@@ -35,4 +36,8 @@ public interface CafeServiceInterface {
     Account verifyOtp(AccountBean account);
 
     void updateUserArrivalInfo(List<String> mobileNumbers, Date date);
+
+    void saveOrderInfo(BuyFoodInfo buyFoodInfo);
+
+     int  getOrderInfo();
 }

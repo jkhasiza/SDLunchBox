@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import com.snapdeal.lunchbox.bean.AccountBean;
@@ -18,6 +19,7 @@ import com.snapdeal.lunchbox.bean.CafeMeterBean;
 import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
 import com.snapdeal.lunchbox.helper.CafeConvertor;
 import com.snapdeal.lunchbox.mao.AccountMao;
+import com.snapdeal.lunchbox.mao.OrderMao;
 import com.snapdeal.lunchbox.mao.RushInfoMao;
 import com.snapdeal.lunchbox.mao.RushPredictionMao;
 import com.snapdeal.lunchbox.mao.UserArrivalMao;
@@ -25,6 +27,7 @@ import com.snapdeal.lunchbox.mao.UserOtpMao;
 import com.snapdeal.lunchbox.mongo.entity.Account;
 import com.snapdeal.lunchbox.mongo.entity.Buddy;
 import com.snapdeal.lunchbox.mongo.entity.BuddyGroup;
+import com.snapdeal.lunchbox.mongo.entity.BuyFoodInfo;
 import com.snapdeal.lunchbox.mongo.entity.RushInfo;
 import com.snapdeal.lunchbox.mongo.entity.UserArrivalInfo;
 import com.snapdeal.lunchbox.mongo.entity.UserOtp;
@@ -54,6 +57,8 @@ public class CafeServiceImpl implements CafeServiceInterface {
     private TwillioServiceInterface twillioServiceInterface;
     @Autowired
     private UserOtpMao              userOtpMao;
+    @Autowired
+    private OrderMao orderMao;
 
     @Override
     public Account getUser(String mobileNumber) {
@@ -173,5 +178,20 @@ public class CafeServiceImpl implements CafeServiceInterface {
                 rushPredictionMao.updateWithIncrement(date, 1);
             }
         }
+    }
+    @Override
+    public void saveOrderInfo(BuyFoodInfo buyFoodInfo) {
+        orderMao.saveOrderInfo(buyFoodInfo);;
+    }
+    @Override
+    public int  getOrderInfo(){
+        List<BuyFoodInfo> orderInfoList = orderMao.getOrderInfo();
+        int count =0;
+        if(!CollectionUtils.isEmpty(orderInfoList)){
+            for(BuyFoodInfo buyFoodInfo : orderInfoList){
+                count = count+buyFoodInfo.getNoOfOrders();
+            }
+        }
+        return count;
     }
 }

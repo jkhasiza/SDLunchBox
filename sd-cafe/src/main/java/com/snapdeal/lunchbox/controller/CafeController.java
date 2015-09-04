@@ -4,6 +4,7 @@
  */
 package com.snapdeal.lunchbox.controller;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,6 +27,7 @@ import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
 import com.snapdeal.lunchbox.mongo.entity.Account;
 import com.snapdeal.lunchbox.mongo.entity.Buddy;
 import com.snapdeal.lunchbox.mongo.entity.BuddyGroup;
+import com.snapdeal.lunchbox.mongo.entity.BuyFoodInfo;
 import com.snapdeal.lunchbox.service.CafeServiceInterface;
 
 /**
@@ -148,6 +150,31 @@ public class CafeController {
             UserGroupRequestBean userGroupRequestBean = convertor(userId, groupName, phoneNumbers);
             cafeServiceInterface.updateGroup(userGroupRequestBean);
             return new ResponseBean<>("");
+        } catch (Exception e) {
+            LOGGER.error("Exception occurred while updating group", e);
+            return new ResponseBean<>("500", "Oops! Something bad is happened");
+        }
+    }
+    @RequestMapping(value = "/buyFood", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public ResponseBean<?> updateGroup(@RequestParam("userCount") int userCount) {
+        try {
+            BuyFoodInfo buyFoodInfo = new BuyFoodInfo();
+            buyFoodInfo.setNoOfOrders(userCount);
+            buyFoodInfo.setDate(new Date());
+            cafeServiceInterface.saveOrderInfo(buyFoodInfo);
+            return new ResponseBean<>("0","OK");
+        } catch (Exception e) {
+            LOGGER.error("Exception occurred while updating group", e);
+            return new ResponseBean<>("500", "Oops! Something bad is happened");
+        }
+    }
+    @RequestMapping(value = "/orderInfo", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public ResponseBean<?> getOrderInfo() {
+        try {
+            
+            return new ResponseBean<>(cafeServiceInterface.getOrderInfo());
         } catch (Exception e) {
             LOGGER.error("Exception occurred while updating group", e);
             return new ResponseBean<>("500", "Oops! Something bad is happened");
