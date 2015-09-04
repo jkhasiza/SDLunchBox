@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.snapdeal.lunchbox.bean.AccountBean;
 import com.snapdeal.lunchbox.bean.CafeMeterBean;
 import com.snapdeal.lunchbox.bean.ResponseBean;
 import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
@@ -35,13 +36,13 @@ public class CafeController {
     
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public ResponseBean<String> login(@RequestParam("phoneNumber") String phoneNumber) {
+    public ResponseBean<?> login(@RequestBody AccountBean accountBean) {
         try {
-            String response = cafeServiceInterface.login(phoneNumber);
-            return new ResponseBean<>(response);
+            cafeServiceInterface.login(accountBean);
+            return new ResponseBean<>();
         } catch(Exception e) {
             LOGGER.error("Exception occurred while creating account", e);
-            return setErrorMessage(e.getMessage());
+           return null;
         }
     }
     
