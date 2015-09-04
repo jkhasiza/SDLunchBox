@@ -88,12 +88,12 @@
 								<echo message="    deleteing war from tomcat server" />
 								<echo message="+---------------------------------------------------+" />
 								<delete includeEmptyDirs="true" failonerror="false">
-									<fileset dir="${cm.webapp.home}" />
+									<fileset dir="${cafe.webapp.home}" />
 								</delete>
 								<echo message="+---------------------------------------------------+" />
 								<echo message="    copying war to tomcat server" />
 								<echo message="+---------------------------------------------------+" />
-								<copy file="${project.build.directory}/ROOT.war" todir="${cm.webapp.home}" />
+								<copy file="${project.build.directory}/ROOT.war" todir="${cafe.webapp.home}" />
 							</tasks>
 						</configuration>
 						<goals>
