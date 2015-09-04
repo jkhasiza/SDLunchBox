@@ -7,6 +7,7 @@ package com.snapdeal.lunchbox.mao.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,13 @@ import com.snapdeal.lunchbox.mongo.entity.RushPrediction;
  */
 @Repository
 public class RushPredictionMaoImpl implements RushPredictionMao {
-    public static final AtomicLong        idCounter = new AtomicLong(0);
+    public static final AtomicLong        idCounter  = new AtomicLong(0);
     @Autowired
     private MongoOperations               mongoOperations;
 
-    private static final SimpleDateFormat dt        = new SimpleDateFormat("HH:mm--dd/MM/yy");
+    private static final SimpleDateFormat dt         = new SimpleDateFormat("HH:mm--dd/MM/yy");
+
+    public static final long              DELTA_TIME = 3 * 3600 * 1000;
 
     @Override
     public void save(RushPrediction rushObject) {
@@ -67,6 +70,18 @@ public class RushPredictionMaoImpl implements RushPredictionMao {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<RushPrediction> getRushPredictionList() {
+        Date startTime = new Date();
+        Date endTime = new Date(startTime.getTime() + DELTA_TIME);
+        Query query = new Query();
+        query.with(new Sort(Sort.Direction.DESC, "date"));
+        Criteria criteria = Criteria.where("date").gte(startTime).lt(endTime);
+        query.addCriteria(criteria);
+        List<RushPrediction> rushPredictionList = mongoOperations.find(query, RushPrediction.class);
+        return rushPredictionList;
     }
 
     private Long getId() {

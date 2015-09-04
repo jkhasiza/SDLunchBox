@@ -12,6 +12,8 @@ import com.snapdeal.lunchbox.bean.CafeMeterBean;
 import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
 import com.snapdeal.lunchbox.mongo.entity.Account;
 import com.snapdeal.lunchbox.mongo.entity.BuyFoodInfo;
+import com.snapdeal.lunchbox.mongo.entity.RushInfo;
+import com.snapdeal.lunchbox.mongo.entity.RushPrediction;
 
 /**
  * @version 1.0, 04-Sep-2015
@@ -40,4 +42,7 @@ public interface CafeServiceInterface {
     void saveOrderInfo(BuyFoodInfo buyFoodInfo);
 
      int  getOrderInfo();
+    List<RushInfo> getRushInfo();
+
+    List<RushPrediction> getRushPrediction();
 }

@@ -59,11 +59,12 @@ public class CrawlerService {
                 Date lastAccessedTime = null;
                 try {
                     String date = words[8].substring(0, words[8].length() - 2);
+                    int adjustedUsers = noOfUsers * 10 / 7;
                     lastAccessedTime = dt.parse(date);
-                    updatePrediction(lastAccessedTime, noOfUsers);
+                    updatePrediction(lastAccessedTime, adjustedUsers);
                     RushInfo rushInfo = new RushInfo();
                     rushInfo.setDate(lastAccessedTime);
-                    rushInfo.setUsers(noOfUsers);
+                    rushInfo.setUsers(adjustedUsers);
                     rushMaoInfo.saveRushInfo(rushInfo);
                     System.out.println(noOfUsers + lastAccessedTime.toString());
                 } catch (ParseException e) {
@@ -76,35 +77,37 @@ public class CrawlerService {
 
     public void updatePrediction(Date startTime, int noOfUsers) {
         RushInfo rush = rushMaoInfo.getCurrentUsers();
-        int deltaUsers = rush.getUsers() - noOfUsers;
+        int deltaUsers = noOfUsers - rush.getUsers();
         if (deltaUsers > 0) {
-            updatePrecdiction(deltaUsers);
+            updatePrecdiction(rush.getUsers(), deltaUsers);
         }
     }
 
-    private void updatePrecdiction(int deltaUsers) {
+    private void updatePrecdiction(int currentUsers, int deltaUsers) {
         Map<String, RushPrediction> predictionMap = rushMaoInfo.getRushPredictionList();
         Date currTime = new Date();
         String currTimeString = null;
         try {
-            Date currTimeInMins = dt.parse(currTime.toString());
+            Date currTimeInMins = dt.parse(dt.format(currTime));
             for (int i = 0; i < PREDICTION_MINS; i++) {
-                currTimeString = currTimeInMins.toString();
+                currTimeString = dt.format(currTimeInMins);
                 RushPrediction prediction = predictionMap.get(currTimeString);
                 if (prediction == null) {
                     prediction = new RushPrediction();
                     try {
                         prediction.setDate(dt.parse(currTimeString));
-                        prediction.setUserCount(0);
+                        prediction.setUserCount(currentUsers);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
                 prediction.setUserCount(prediction.getUserCount() + deltaUsers);
+                rushPrediction.save(prediction);
                 currTimeInMins = new Date(currTimeInMins.getTime() + 60 * 1000);
             }
             predictionMap.get(currTimeString);
         } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 }

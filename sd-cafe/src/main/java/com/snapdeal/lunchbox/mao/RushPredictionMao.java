@@ -5,6 +5,7 @@
 package com.snapdeal.lunchbox.mao;
 
 import java.util.Date;
+import java.util.List;
 
 import com.snapdeal.lunchbox.mongo.entity.RushPrediction;
 
@@ -18,5 +19,7 @@ public interface RushPredictionMao {
     void update(RushPrediction rushObject);
 
     void updateWithIncrement(Date date, int increment);
+
+    List<RushPrediction> getRushPredictionList();
 
 }
