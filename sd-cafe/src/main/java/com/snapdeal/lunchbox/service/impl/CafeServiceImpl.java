@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.snapdeal.lunchbox.bean.AccountBean;
 import com.snapdeal.lunchbox.bean.CafeMeterBean;
 import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
+import com.snapdeal.lunchbox.helper.CafeConvertor;
 import com.snapdeal.lunchbox.mao.AccountMao;
 import com.snapdeal.lunchbox.mao.RushInfoMao;
 import com.snapdeal.lunchbox.mongo.entity.Account;
@@ -28,7 +29,9 @@ public class CafeServiceImpl implements CafeServiceInterface {
     private AccountMao  accountMao;
     @Autowired
     private RushInfoMao rusInfoMao;
-
+    @Autowired
+    private CafeConvertor cafeConvertor;
+    
     @Override
     public String findAdById() {
         // TODO Auto-generated method stub
@@ -72,8 +75,7 @@ public class CafeServiceImpl implements CafeServiceInterface {
     }
 
     @Override
-    public void createGroup(UserGroupRequestBean userGroupRequestBean) {
-        // TODO Auto-generated method stub
-
+    public Account createGroup(UserGroupRequestBean userGroupRequestBean) {
+        return cafeConvertor.createGroupMerge(userGroupRequestBean);
     }
 }

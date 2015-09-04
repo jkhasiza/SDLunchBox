@@ -54,6 +54,13 @@ public class CafeController {
         return responseBean;
     }
     
+    private ResponseBean<CafeMeterBean> setStatusError(String error) {
+        ResponseBean<CafeMeterBean> responseBean = new ResponseBean<CafeMeterBean>();
+        responseBean.setStatusCode("ERROR");
+        responseBean.setMessage(error);
+        return responseBean;
+    }
+    
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public ResponseBean<CafeMeterBean> getCafeStatus() {
@@ -61,7 +68,7 @@ public class CafeController {
             return new ResponseBean<>(cafeServiceInterface.getCafeStatus());
         } catch(Exception e) {
             LOGGER.error("Exception occurred while getting cafe status", e);
-            return null;
+            return setStatusError(e.getMessage());
         }
     }
     
@@ -87,12 +94,12 @@ public class CafeController {
     
     @RequestMapping(value="/createGroup", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public ResponseBean<?> createGroup(@RequestBody UserGroupRequestBean userGroupRequestBean) {
+    public ResponseBean<String> createGroup(@RequestBody UserGroupRequestBean userGroupRequestBean) {
         try {
             cafeServiceInterface.createGroup(userGroupRequestBean);
-            return new ResponseBean<>();
+            return new ResponseBean<>("");
         } catch(Exception e) {
-            return null;
+            return setError(e.getMessage());
         }
     }
 }

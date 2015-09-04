@@ -19,5 +19,5 @@ public interface CafeServiceInterface {
     public CafeMeterBean getCafeStatus();
     public UserGroupRequestBean getGroupInfo(String phoneNumber);
     public UserGroupRequestBean getPendingUsers(String phoneNumber);
-    public void createGroup(UserGroupRequestBean userGroupRequestBean);
+    public Account createGroup(UserGroupRequestBean userGroupRequestBean);
 }

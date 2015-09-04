@@ -5,6 +5,7 @@
 package com.snapdeal.lunchbox.mao;
 
 import com.snapdeal.lunchbox.mongo.entity.Account;
+import com.snapdeal.lunchbox.mongo.entity.BuddyGroup;
 
 /**
  * @version 1.0, 04-Sep-2015
@@ -20,4 +21,5 @@ public interface AccountMao {
 
     Account updateAccountDeviceId(Long id, String deviceId);
 
+    Account createAccountGroup(String mobileNo, BuddyGroup buddyGroup);
 }
