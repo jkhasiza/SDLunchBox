@@ -23,7 +23,7 @@ var options = new function() {
 	this.JS_SRC = ['app/libs/js/**/*.js','app/js/app.js', 'app/js/**/*.js'],      // 0 index must be vendor libs for convention sake
 	this.CSS_SRC = ['app/libs/css/**/*.css', 'app/css/**/*.css'], // 0 index must be vendor libs for convention sake
 
-	this.DIST_SRC = '../src/main/resources/static',	// specific to spring-starter-project. change to suit your project needs.
+	this.DIST_SRC = 'SDcafe/www/dist',	// specific to spring-starter-project. change to suit your project needs.
 	
 	this.PARTIALS_DEST = 'app/js/bin/template',
 	this.FONTS_DEST = this.DIST_SRC + '/fonts',
