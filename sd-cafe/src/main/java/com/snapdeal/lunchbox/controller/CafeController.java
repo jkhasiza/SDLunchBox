@@ -40,7 +40,7 @@ public class CafeController {
     @Autowired
     private CafeServiceInterface cafeServiceInterface;
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "login",method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public ResponseBean<?> login(HttpServletResponse response, HttpServletRequest request, @RequestParam("mobileNumber") String mobileNumber,@RequestParam(value ="deviceId",required = false) String deviceId) {
         try {
@@ -81,21 +81,7 @@ public class CafeController {
         }
     }
 
-    /*private ResponseBean<String> setError(String error) {
-        ResponseBean<String> responseBean = new ResponseBean<String>();
-        responseBean.setStatusCode("ERROR");
-        responseBean.setMessage(error);
-        return responseBean;
-    }*/
-
-    /*private ResponseBean<CafeMeterBean> setStatusError(String error) {
-        ResponseBean<CafeMeterBean> responseBean = new ResponseBean<CafeMeterBean>();
-        responseBean.setStatusCode("ERROR");
-        responseBean.setMessage(error);
-        return responseBean;
-    }*/
-
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/cafeStatus", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public ResponseBean<?> getCafeStatus() {
         try {
@@ -118,15 +104,6 @@ public class CafeController {
         }
     }
 
-    /*@RequestMapping(value = "/pendingGroup", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public ResponseBean<UserGroupRequestBean> getPendingUsers(@RequestParam("phoneNumber") String phoneNumber) {
-        try {
-            return new ResponseBean<>(cafeServiceInterface.getPendingUsers(phoneNumber));
-        } catch(Exception e) {
-            return null;
-        }
-    }*/
 
     @RequestMapping(value = "/createGroup", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
