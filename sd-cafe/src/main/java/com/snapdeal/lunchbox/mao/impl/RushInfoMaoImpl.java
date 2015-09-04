@@ -45,10 +45,9 @@ public class RushInfoMaoImpl implements RushInfoMao{
         if (idCounter.get() == 0) {
             Query query = new Query();
             query.with(new Sort(Sort.Direction.DESC, "_id"));
-            Object dbObj = mongoOperations.findOne(query, RushInfo.class);
-            if (dbObj != null && dbObj instanceof Account) {
-                Account dbAccount = (Account) dbObj;
-                idCounter.compareAndSet(0, (Long) dbAccount.getId());
+            RushInfo rushInfo = mongoOperations.findOne(query, RushInfo.class);
+            if (rushInfo != null) {
+                idCounter.compareAndSet(0, (Long) rushInfo.getId());
             } else {
                 idCounter.set(0);
             }
