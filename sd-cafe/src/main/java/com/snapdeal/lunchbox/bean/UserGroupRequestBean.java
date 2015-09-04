@@ -16,7 +16,7 @@ public class UserGroupRequestBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String userId;
-    private List<String> users;
+    private List<String>      users;
     
     public String getUserId() {
         return userId;
