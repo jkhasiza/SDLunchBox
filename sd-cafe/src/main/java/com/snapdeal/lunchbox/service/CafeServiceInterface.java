@@ -15,10 +15,20 @@ import com.snapdeal.lunchbox.mongo.entity.Account;
  */
 public interface CafeServiceInterface {
     public String findAdById();
-    public Account login(AccountBean account);
+
+    public void login(AccountBean account);
+
     public CafeMeterBean getCafeStatus();
+
     public UserGroupRequestBean getGroupInfo(String phoneNumber);
+
     public UserGroupRequestBean getPendingUsers(String phoneNumber);
-    public Account createGroup(UserGroupRequestBean userGroupRequestBean);
+
     public Account updateGroup(UserGroupRequestBean userGroupRequestBean);
+
+    public Account createGroup(UserGroupRequestBean userGroupRequestBean);
+
+    public Account getUser(String mobileNumber);
+
+    Account verifyOtp(AccountBean account);
 }
