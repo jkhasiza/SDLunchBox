@@ -6,6 +6,8 @@ package com.snapdeal.lunchbox.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import com.snapdeal.lunchbox.bean.CafeMeterBean;
+import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
 import com.snapdeal.lunchbox.service.CafeServiceInterface;
 
 /**
@@ -22,4 +24,32 @@ public class CafeServiceImpl implements CafeServiceInterface {
         return null;
     }
 
+    public String login(String phoneNumber) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public CafeMeterBean getCafeStatus() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserGroupRequestBean getGroupInfo(String phoneNumber) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserGroupRequestBean getPendingUsers(String phoneNumber) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void createGroup(UserGroupRequestBean userGroupRequestBean) {
+        // TODO Auto-generated method stub
+        
+    }
 }
