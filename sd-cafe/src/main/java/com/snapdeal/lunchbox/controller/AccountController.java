@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.snapdeal.lunchbox.mao.AccountMao;
+import com.snapdeal.lunchbox.mongo.entity.Account;
 
 /**
  * @version 1.0, 04-Sep-2015
@@ -25,7 +26,15 @@ public class AccountController {
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public String findAdById() {
-        accountMao.saveAccount();
+        Account account = new Account();
+        account.setDeviceId("2");
+        account.setId(2L);
+        account.setGroupId(1L);
+        account.setMobileNumber("9953212987");
+        //accountMao.saveAccount(account);
+        
+        accountMao.getAccountByPhoneNo("9953212987");
+        accountMao.updateAccountGroup(2L, "9953212987");
         return "hello";
     }
 }
