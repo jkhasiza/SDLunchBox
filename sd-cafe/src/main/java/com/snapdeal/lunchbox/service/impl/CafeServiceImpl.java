@@ -61,15 +61,15 @@ public class CafeServiceImpl implements CafeServiceInterface {
         return account;
     }
 
-    public void login(AccountBean account) {
+    public void login(String mobileNo,String deviceId) {
         String message = "Your otp for SdCafe app is $otp";
-        String otp = twillioServiceInterface.messageTest(account.getMobileNumber(), message);
+        String otp = twillioServiceInterface.messageTest(mobileNo, message);
         if (!StringUtils.isEmpty(otp)) {
-            UserOtp dbuserOtp = userOtpMao.getOTP(account.getMobileNumber());
+            UserOtp dbuserOtp = userOtpMao.getOTP(mobileNo);
             if (null == dbuserOtp) {
                 UserOtp userOtp = new UserOtp();
                 userOtp.setOtp(otp);
-                userOtp.setMobileNumber(account.getMobileNumber());
+                userOtp.setMobileNumber(mobileNo);
                 userOtpMao.saveUserOtp(userOtp);
             }else{
                 userOtpMao.updateUserOtp(dbuserOtp.getId(), otp);

@@ -18,7 +18,7 @@ import com.snapdeal.lunchbox.mongo.entity.Account;
  */
 public interface CafeServiceInterface {
 
-    public void login(AccountBean account);
+    public void login(String mobileNo,String deviceId);
 
     public CafeMeterBean getCafeStatus();
 

@@ -36,11 +36,11 @@ public class CafeController {
     @Autowired
     private CafeServiceInterface cafeServiceInterface;
 
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public ResponseBean<?> login(HttpServletResponse response, HttpServletRequest request, @RequestBody AccountBean accountBean) {
+    public ResponseBean<?> login(HttpServletResponse response, HttpServletRequest request, @RequestParam("mobileNumber") String mobileNumber,@RequestParam(value ="deviceId",required = false) String deviceId) {
         try {
-            cafeServiceInterface.login(accountBean);
+            cafeServiceInterface.login(mobileNumber,deviceId);
             return new ResponseBean<>("0", "OK");
         } catch (Exception e) {
             LOGGER.error("Exception occurred while creating account", e);
