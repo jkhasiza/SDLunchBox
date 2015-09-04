@@ -84,7 +84,7 @@ public class AccountMaoImpl implements AccountMao {
     }
 
     @Override
-    public Account createAccountGroup(String mobileNo, BuddyGroup buddyGroup) {
+    public Account createOrUpdateAccountGroup(String mobileNo, BuddyGroup buddyGroup) {
         Query query = new Query();
         Criteria criteria = Criteria.where("mobileNumber").is(mobileNo);
         query.addCriteria(criteria);

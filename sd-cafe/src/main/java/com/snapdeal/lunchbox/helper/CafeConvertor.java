@@ -7,9 +7,7 @@ package com.snapdeal.lunchbox.helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
 import com.snapdeal.lunchbox.mao.AccountMao;
-import com.snapdeal.lunchbox.mongo.entity.Account;
 
 /**
  *  
@@ -20,12 +18,4 @@ import com.snapdeal.lunchbox.mongo.entity.Account;
 public class CafeConvertor {
     @Autowired
     private AccountMao accountMao;
-    
-    public Account createGroupMerge(UserGroupRequestBean userGroupRequestBean) {
-        if(userGroupRequestBean.getBuddyGroup() != null) {
-            return accountMao.createAccountGroup(userGroupRequestBean.getUserId(), userGroupRequestBean.getBuddyGroup());
-        } else {
-            return null;
-        }
-    }
 }

@@ -21,5 +21,5 @@ public interface AccountMao {
 
     Account updateAccountDeviceId(Long id, String deviceId);
 
-    Account createAccountGroup(String mobileNo, BuddyGroup buddyGroup);
+    Account createOrUpdateAccountGroup(String mobileNo, BuddyGroup buddyGroup);
 }

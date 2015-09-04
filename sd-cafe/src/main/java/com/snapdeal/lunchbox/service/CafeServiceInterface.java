@@ -20,4 +20,5 @@ public interface CafeServiceInterface {
     public UserGroupRequestBean getGroupInfo(String phoneNumber);
     public UserGroupRequestBean getPendingUsers(String phoneNumber);
     public Account createGroup(UserGroupRequestBean userGroupRequestBean);
+    public Account updateGroup(UserGroupRequestBean userGroupRequestBean);
 }

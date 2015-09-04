@@ -42,7 +42,7 @@ public class CafeController {
             Account account = cafeServiceInterface.login(accountBean);
             return new ResponseBean<Account>(account);
         } catch(Exception e) {
-            LOGGER.error("Exception occurred while creating account", e);
+           LOGGER.error("Exception occurred while creating account", e);
            return new ResponseBean<>("500","Oops! Something bad is happened");
         }
     }
@@ -68,7 +68,7 @@ public class CafeController {
             return new ResponseBean<>(cafeServiceInterface.getCafeStatus());
         } catch(Exception e) {
             LOGGER.error("Exception occurred while getting cafe status", e);
-            return setStatusError(e.getMessage());
+            return new ResponseBean<>("500","Oops! Something bad is happened");
         }
     }
     
@@ -77,12 +77,13 @@ public class CafeController {
     public ResponseBean<UserGroupRequestBean> getGroupInfo(@RequestParam("phoneNumber") String phoneNumber) {
         try {
             return new ResponseBean<>(cafeServiceInterface.getGroupInfo(phoneNumber));
-        } catch(Exception e ){
-            return null;
+        } catch(Exception e ) {
+            LOGGER.error("Exception occurred while getting group ", e);
+            return new ResponseBean<>("500","Oops! Something bad is happened");
         }
     }
     
-    @RequestMapping(value = "/pendingGroup", method = RequestMethod.GET, produces = "application/json")
+    /*@RequestMapping(value = "/pendingGroup", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public ResponseBean<UserGroupRequestBean> getPendingUsers(@RequestParam("phoneNumber") String phoneNumber) {
         try {
@@ -90,13 +91,25 @@ public class CafeController {
         } catch(Exception e) {
             return null;
         }
-    }
+    }*/
     
     @RequestMapping(value="/createGroup", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     @ResponseBody
     public ResponseBean<String> createGroup(@RequestBody UserGroupRequestBean userGroupRequestBean) {
         try {
             cafeServiceInterface.createGroup(userGroupRequestBean);
+            return new ResponseBean<>("");
+        } catch(Exception e) {
+            LOGGER.error("Exception occurred while creating group", e);
+            return new ResponseBean<>("500","Oops! Something bad is happened");
+        }
+    }
+    
+    @RequestMapping(value="/updateGroup", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @ResponseBody
+    public ResponseBean<String> updateGroup(@RequestBody UserGroupRequestBean userGroupRequestBean) {
+        try {
+            cafeServiceInterface.updateGroup(userGroupRequestBean);
             return new ResponseBean<>("");
         } catch(Exception e) {
             return setError(e.getMessage());
