@@ -4,8 +4,14 @@
  */
 package com.snapdeal.lunchbox.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.snapdeal.lunchbox.bean.AccountBean;
+import com.snapdeal.lunchbox.bean.CafeMeterBean;
+import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
+import com.snapdeal.lunchbox.mao.AccountMao;
+import com.snapdeal.lunchbox.mongo.entity.Account;
 import com.snapdeal.lunchbox.service.CafeServiceInterface;
 
 /**
@@ -16,10 +22,42 @@ import com.snapdeal.lunchbox.service.CafeServiceInterface;
 @Service
 public class CafeServiceImpl implements CafeServiceInterface {
 
+    @Autowired private AccountMao accountMao;
+    
     @Override
     public String findAdById() {
         // TODO Auto-generated method stub
         return null;
     }
 
+    public void login(AccountBean account) {
+        Account newaccount = new Account();
+        newaccount.setDeviceId(account.getDeviceId());
+        newaccount.setMobileNumber(account.getMobileNumber());
+        accountMao.saveAccount(newaccount);
+    }
+
+    @Override
+    public CafeMeterBean getCafeStatus() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserGroupRequestBean getGroupInfo(String phoneNumber) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public UserGroupRequestBean getPendingUsers(String phoneNumber) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void createGroup(UserGroupRequestBean userGroupRequestBean) {
+        // TODO Auto-generated method stub
+        
+    }
 }
