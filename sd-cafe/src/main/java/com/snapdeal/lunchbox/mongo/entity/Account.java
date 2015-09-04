@@ -15,8 +15,8 @@ public class Account {
 
     private Long   id;
     private String mobileNumber;
-    private Long    groupId;
-    private String DeviceId;
+    private Long   groupId;
+    private String deviceId;
 
     public Long getId() {
         return id;
@@ -34,19 +34,19 @@ public class Account {
         this.mobileNumber = mobileNumber;
     }
 
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
     public String getDeviceId() {
-        return DeviceId;
+        return deviceId;
     }
 
     public void setDeviceId(String deviceId) {
-        DeviceId = deviceId;
+        this.deviceId = deviceId;
+    }
+
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 }
