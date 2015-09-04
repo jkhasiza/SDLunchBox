@@ -4,6 +4,8 @@
  */
 package com.snapdeal.lunchbox.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.snapdeal.lunchbox.mao.AccountMao;
+import com.snapdeal.lunchbox.mao.RushInfoMao;
 import com.snapdeal.lunchbox.mongo.entity.Account;
+import com.snapdeal.lunchbox.mongo.entity.RushInfo;
 
 /**
  * @version 1.0, 04-Sep-2015
@@ -21,20 +25,15 @@ import com.snapdeal.lunchbox.mongo.entity.Account;
 @RequestMapping("/account")
 public class AccountController {
     @Autowired
-    private AccountMao accountMao;
+    private RushInfoMao accountMao;
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public String findAdById() {
-        Account account = new Account();
-        account.setDeviceId("2");
-        account.setId(2L);
-        account.setGroupId(1L);
-        account.setMobileNumber("9953212987");
-        //accountMao.saveAccount(account);
-        
-        accountMao.getAccountByPhoneNo("9953212987");
-        accountMao.updateAccountGroup(2L, "9953212987");
+        RushInfo rush = new RushInfo();
+        rush.setUsers(5);
+        rush.setDate(new Date());
+        accountMao.saveRushInfo(rush);
         return "hello";
     }
 }
