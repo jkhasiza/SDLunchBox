@@ -34,7 +34,7 @@ public class CafeController {
     @Autowired
     private CafeServiceInterface cafeServiceInterface;
     
-    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public ResponseBean<?> login(@RequestBody AccountBean accountBean) {
         try {
