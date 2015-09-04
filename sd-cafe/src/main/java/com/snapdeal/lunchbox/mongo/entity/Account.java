@@ -34,11 +34,12 @@ public class Account {
         this.mobileNumber = mobileNumber;
     }
 
-    public int getGroupId() {
+
+    public Long getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(Long groupId) {
         this.groupId = groupId;
     }
 
