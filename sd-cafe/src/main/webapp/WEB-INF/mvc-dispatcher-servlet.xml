@@ -7,12 +7,9 @@
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:repository="http://www.springframework.org/schema/data/repository"
 	xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
 		http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
-        http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -31,23 +28,8 @@
 	<tx:annotation-driven />
 	<task:annotation-driven />
 	<context:annotation-config />
-	<aop:aspectj-autoproxy />
 
 	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
-
-	<mongo:mongo replica-set="#{systemProperties['mongoCafe.replicaset']}"
-		id="mongoCafe">
-		<mongo:options auto-connect-retry="true"
-			connections-per-host="40" slave-ok="true" />
-	</mongo:mongo>
-
-	<mongo:db-factory dbname="sdCafedb" mongo-ref="mongoCafe"
-		id="mongoDbFactoryApi" />
-
-	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-		<constructor-arg name="mongoDbFactory" ref="mongoDbFactoryApi" />
-	</bean>
-
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
