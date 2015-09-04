@@ -40,9 +40,8 @@ public class CafeController {
     @ResponseBody
     public ResponseBean<?> login(HttpServletResponse response, HttpServletRequest request, @RequestBody AccountBean accountBean) {
         try {
-            Account account = cafeServiceInterface.login(accountBean);
-            response.setHeader("Access-Control-Allow-Origin", "localhost:9001");
-            return new ResponseBean<Account>(account);
+            cafeServiceInterface.login(accountBean);
+            return new ResponseBean<>("0", "OK");
         } catch (Exception e) {
             LOGGER.error("Exception occurred while creating account", e);
             return new ResponseBean<>("500", "Oops! Something bad is happened");
