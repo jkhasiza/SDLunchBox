@@ -1,0 +1,260 @@
+.template-container #template-list {
+  width: 123%;
+  margin-left: -15px;
+  margin-bottom: -5px;
+}
+/* Patient Registration Form css */
+
+.text-left {
+  text-align: left !important;
+}
+#form-container {
+  background: white;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+#form-container .page-header {
+  background: #f5f5f5;
+  margin: 0;
+  padding: 2px;
+}
+/* numbered buttons */
+
+#status-buttons {} #status-buttons a {
+  color: #89cc97;
+  display: inline-block;
+  font-size: 12px;
+  margin-right: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+#status-buttons a:hover {
+  text-decoration: none;
+}
+/* we will style the span as the circled number */
+
+#status-buttons span {
+  background: #89cc97;
+  display: block;
+  height: 30px;
+  margin: 0 auto 10px;
+  padding-top: 5px;
+  width: 30px;
+  border-radius: 50%;
+}
+/* active buttons turn light green-blue*/
+
+#status-buttons a.active span {
+  background: #2e3e4e;
+}
+/* PRF ends here */
+
+.form-group.required .control-label:after {
+  content: "*";
+  color: red;
+}
+.nomsg {
+  font-size: x-large;
+  margin-left: 150px;
+  margin-top: 50px;
+}
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  float: left;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before, .rating > span:hover ~ span:before {
+  content: "\2605";
+  position: absolute;
+  color: #65bd77;
+}
+.login-heading {
+  height: auto;
+  line-height: 20px;
+}
+@media (max-width: 767px) {
+  .login-heading {
+    float: none !important;
+  }
+}
+.input-lg, .form-horizontal .form-group-lg .form-control {
+  font-size: 12px;
+}
+@media (min-width: 767px) {
+  .side-bar {
+    position: fixed;
+    height: 100%;
+    margin-top: 50px;
+  }
+}
+.header-fixed {
+  position: fixed;
+  width: 100%;
+  z-index: 500;
+}
+@media (min-width: 767px) {
+  .padding-high {
+    padding-left: 220px;
+    padding-top: 50px;
+  }
+}
+@media (max-width: 767px) {
+  .padd-high-builder {
+    padding-top: 50px;
+  }
+}
+.search-sm {
+  height: 40px;
+  padding: 5px 10px;
+  font-size: 15px;
+  line-height: 2.5;
+  border-radius: 3px;
+}
+.padding-search {
+  padding: 7.5px;
+}
+p {
+  margin: 0 0 0px !important;
+}
+.red-text {
+  color: #fb6b5b;
+}
+.margin-top-max {
+  margin-top: 50px;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.top-zero {
+  top: 0;
+}
+.button-sm {
+  height: 40px;
+  padding: 5px 10px;
+  font-size: 15px;
+  border-radius: 3px;
+}
+.z-index-medium {
+  z-index: 9;
+}
+@media (max-width: 767px) {
+  .margin-top-side-bar {
+    margin-top: 50px;
+  }
+}
+.floating-button {
+  position: fixed;
+  bottom: 0;
+}
+.lable-style .form-horizontal .control-label {
+  padding-top: 7px;
+  margin-bottom: 0;
+  text-align: right;
+  color: #717171;
+}
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+.btn-yellow {
+  color: #fff !important;
+  background-color: #ffc333;
+  border-color: #ffc333;
+}
+.styling {
+  height: 42px;
+  border-radius: 0px;
+  margin-bottom: 5px;
+  background-color: #374b5e;
+  border-color: #2e3e4e;
+}
+.styling:hover {
+  background-color: #627282;
+  border-color: #2e3e4e;
+}
+.width-85 {
+  width: 85%;
+}
+/* Fill-form css */
+
+.form-container {
+  margin-left: auto;
+  margin-right: auto;
+  /*max-width: 500px;*/
+  
+  background: #FFF;
+  padding: 30px 30px 20px 30px;
+  box-shadow: rgba(187, 187, 187, 1) 0 0px 20px -1px;
+  -webkit-box-shadow: rgba(187, 187, 187, 1) 0 0px 20px -1px;
+  font: 12px Arial, Helvetica, sans-serif;
+  color: #666;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+.form-container .heading {
+  font: 24px"Trebuchet MS", Arial, Helvetica, sans-serif;
+  padding: 0px 0px 10px 40px;
+  display: block;
+  border-bottom: 1px solid #F5F5F5;
+  margin: -10px -30px 10px -30px;
+  color: #969696;
+}
+/* .form-container label {
+  display: block;
+  margin: 0px 0px 5px;
+  float: left;
+  width: 20%;
+  text-align: right;
+  padding-right: 10px;
+  margin-top: 10px;
+  color: #969696;
+} */
+/* .form-container label {
+  display: block;
+  margin: 0px 0px 5px;
+  float: left;
+  width: 20%;
+  text-align: right;
+  padding-right: 10px;
+  margin-top: 10px;
+  color: #969696;
+}
+*/
+
+.form-container input[type="text"], .form-container input[type="email"], .form-container textarea, .form-container select {
+  color: #555;
+  width: 70%;
+  padding: 3px 0px 3px 5px;
+  margin-top: 2px;
+  margin-right: 6px;
+  margin-bottom: 16px;
+  border: 1px solid #e5e5e5;
+  background: #fbfbfb;
+  height: 25px;
+  line-height: 15px;
+  outline: 0;
+  -webkit-box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2);
+  box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2);
+}
+.form-container textarea {
+  height: 100px;
+  padding: 5px 0px 0px 5px;
+  width: 70%;
+}
+.btn-height {
+  height: 46px;
+}
+.icon-font-mobile {
+  font-size: 24px;
+}
+.to-lowercase{
+  text-transform: lowercase !important;
+}
