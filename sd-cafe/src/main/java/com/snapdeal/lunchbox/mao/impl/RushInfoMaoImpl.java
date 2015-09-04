@@ -4,7 +4,6 @@
  */
 package com.snapdeal.lunchbox.mao.impl;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,7 +48,7 @@ public class RushInfoMaoImpl implements RushInfoMao {
         Date endTime = new Date();
         Date startTime = new Date(endTime.getTime() - DELTA_TIME);
         Query query = new Query();
-        query.with(new Sort(Sort.Direction.DESC, "date"));
+        query.with(new Sort(Sort.Direction.ASC, "date"));
         Criteria criteria = Criteria.where("date").gte(startTime).lt(endTime);
         query.addCriteria(criteria);
         List<RushInfo> rushInfoList = mongoOperations.find(query, RushInfo.class);
@@ -67,14 +66,9 @@ public class RushInfoMaoImpl implements RushInfoMao {
         query.addCriteria(criteria);
         List<RushPrediction> rushPredictionList = mongoOperations.find(query, RushPrediction.class);
         Map<String, RushPrediction> predictionMap = new HashMap<String, RushPrediction>();
-
         for (RushPrediction rushPrediction : rushPredictionList) {
-            String dateString = rushPrediction.getDate().toString();
-            try {
-                predictionMap.put(dt.parse(dateString).toString(), rushPrediction);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            String dateString = dt.format(rushPrediction.getDate());
+            predictionMap.put(dateString, rushPrediction);
         }
         return predictionMap;
 
