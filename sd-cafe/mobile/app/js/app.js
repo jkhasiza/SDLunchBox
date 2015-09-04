@@ -1,5 +1,5 @@
 angular.module( 'app', [ 'ui.router', 'ui.bootstrap', 'header', 'home',  'LocalStorageModule',
-  'login'
+  'login', 'dashboard', 'addParticipant'
 ] ).config( function( $httpProvider, localStorageServiceProvider, $locationProvider ) {
   $httpProvider.interceptors.push( 'SessionInjector' );
   $httpProvider.interceptors.push( 'ResponseInterceptor' );
