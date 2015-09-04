@@ -24,28 +24,36 @@ import com.snapdeal.lunchbox.service.CafeServiceInterface;
 @Service
 public class CafeServiceImpl implements CafeServiceInterface {
 
-    @Autowired private AccountMao accountMao;
-    @Autowired private RushInfoMao rusInfoMao;
-    
-    
+    @Autowired
+    private AccountMao  accountMao;
+    @Autowired
+    private RushInfoMao rusInfoMao;
+
     @Override
     public String findAdById() {
         // TODO Auto-generated method stub
         return null;
     }
 
-    public void login(AccountBean account) {
-        Account newaccount = new Account();
-        newaccount.setDeviceId(account.getDeviceId());
-        newaccount.setMobileNumber(account.getMobileNumber());
-        accountMao.saveAccount(newaccount);
+    public Account login(AccountBean account) {
+        Account dbAccount = accountMao.getAccountByPhoneNo(account.getMobileNumber());
+        if (null == dbAccount) {
+            Account newaccount = new Account();
+            newaccount.setDeviceId(account.getDeviceId());
+            newaccount.setMobileNumber(account.getMobileNumber());
+            accountMao.saveAccount(newaccount);
+            return newaccount;
+        }else{
+            dbAccount = accountMao. updateAccountDeviceId(dbAccount.getId(), account.getDeviceId());
+        }
+        return dbAccount;
     }
 
     @Override
     public CafeMeterBean getCafeStatus() {
         RushInfo rushInfo = rusInfoMao.getCurrentUsers();
-        if(null != rushInfo){
-            CafeMeterBean cafeMeterBean=  new CafeMeterBean(rushInfo);
+        if (null != rushInfo) {
+            CafeMeterBean cafeMeterBean = new CafeMeterBean(rushInfo);
             return cafeMeterBean;
         }
         return null;
@@ -66,6 +74,6 @@ public class CafeServiceImpl implements CafeServiceInterface {
     @Override
     public void createGroup(UserGroupRequestBean userGroupRequestBean) {
         // TODO Auto-generated method stub
-        
+
     }
 }

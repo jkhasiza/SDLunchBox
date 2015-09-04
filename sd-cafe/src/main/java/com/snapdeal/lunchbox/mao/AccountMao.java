@@ -14,8 +14,10 @@ public interface AccountMao {
 
     Account getAccountByPhoneNo(String mobileNo);
 
-    void saveAccount(Account account);
+    Account saveAccount(Account account);
 
     Account updateAccountGroup(Long groupId, String mobileNo);
+
+    Account updateAccountDeviceId(Long id, String deviceId);
 
 }

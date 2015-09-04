@@ -29,6 +29,11 @@ public class ResponseBean<T> implements Serializable {
         this.message = message;
         this.data = data;
     }
+    
+    public ResponseBean(String code, String message) {
+        this.statusCode = code;
+        this.message = message;
+    }
 
     public ResponseBean() {
         this.statusCode = Constants.SUCCESS;

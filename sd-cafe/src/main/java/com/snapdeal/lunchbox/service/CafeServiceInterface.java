@@ -7,6 +7,7 @@ package com.snapdeal.lunchbox.service;
 import com.snapdeal.lunchbox.bean.AccountBean;
 import com.snapdeal.lunchbox.bean.CafeMeterBean;
 import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
+import com.snapdeal.lunchbox.mongo.entity.Account;
 
 /**
  * @version 1.0, 04-Sep-2015
@@ -14,7 +15,7 @@ import com.snapdeal.lunchbox.bean.UserGroupRequestBean;
  */
 public interface CafeServiceInterface {
     public String findAdById();
-    public void login(AccountBean account);
+    public Account login(AccountBean account);
     public CafeMeterBean getCafeStatus();
     public UserGroupRequestBean getGroupInfo(String phoneNumber);
     public UserGroupRequestBean getPendingUsers(String phoneNumber);
