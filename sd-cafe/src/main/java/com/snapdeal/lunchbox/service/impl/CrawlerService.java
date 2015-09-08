@@ -44,6 +44,7 @@ public class CrawlerService {
     @Scheduled(fixedDelay = 2 * 60 * 1000)
     public void getCafeUsers() {
         try {
+            System.out.println("Crawler Service Started..");
             ResponseEntity<String> response = restTemplate.exchange("http://172.20.1.116/results.txt", HttpMethod.GET, null, new ParameterizedTypeReference<String>() {
             });
 
@@ -59,15 +60,17 @@ public class CrawlerService {
                 Date lastAccessedTime = null;
                 try {
                     String date = words[8].substring(0, words[8].length() - 2);
-                    int adjustedUsers = noOfUsers * 10 / 7;
+                    int adjustedUsers = noOfUsers * 2;
                     lastAccessedTime = dt.parse(date);
                     updatePrediction(lastAccessedTime, adjustedUsers);
                     RushInfo rushInfo = new RushInfo();
                     rushInfo.setDate(lastAccessedTime);
                     rushInfo.setUsers(adjustedUsers);
+                    
                     rushMaoInfo.saveRushInfo(rushInfo);
                     System.out.println(noOfUsers + lastAccessedTime.toString());
                 } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
         } catch (Exception e) {

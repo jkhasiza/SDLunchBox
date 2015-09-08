@@ -48,4 +48,9 @@ public class RushInfo implements Serializable {
         this.date = date;
     }
 
+    @Override
+    public String toString() {
+        return "RushInfo [users=" + users + ", date=" + date + "]";
+    }
+
 }
